@@ -1,0 +1,42 @@
+services:
+  spark-master:
+    image: apache/spark:4.0.0-preview2
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_LOCAL_IP=spark-master
+      - SPARK_CONF_DIR=/opt/spark/conf
+      - SPARK_DEPLOY_REST_ENABLED=true
+      - SPARK_MASTER_REST_PORT=6066
+    ports:
+      - "7077:7077"
+      - "8081:8080"
+      - "6066:6066"
+    volumes:
+      - ./spark-app:/opt/spark/work-dir
+    command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
+    networks:
+      - spark-network
+
+  spark-worker:
+    image: apache/spark:4.0.0-preview2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_DRIVER_MEMORY=1g
+      - SPARK_EXECUTOR_MEMORY=1g
+      - SPARK_WORKER_OPTS="-Dspark.worker.cleanup.enabled=true"
+      - SPARK_LOG_LEVEL=DEBUG
+      - SPARK_CONF_DIR=/opt/spark/conf
+    volumes:
+    - ./spark-app:/opt/spark/work-dir
+    depends_on:
+      - spark-master
+    command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --webui-port 8081'"
+    networks:
+      - spark-network
+networks:
+  spark-network:
+    driver: bridge
