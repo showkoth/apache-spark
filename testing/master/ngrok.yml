@@ -1,0 +1,12 @@
+version: 3
+
+agent:
+  authtoken: 2sGCqGL1sAUdFko3enB0Rz5ZXlh_5dA3B5TKCCbmE7wtPyYsE
+
+tunnels:
+  basic:
+    proto: http
+    addr: host.docker.internal:8081
+  tcp_tunnel:
+    proto: tcp
+    addr: host.docker.internal:7077

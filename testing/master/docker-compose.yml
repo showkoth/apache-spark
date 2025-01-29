@@ -1,0 +1,36 @@
+services:
+  spark-master:
+    image: apache/spark:3.5.4
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_LOCAL_IP=spark-master
+      - SPARK_CONF_DIR=/opt/spark/conf
+      - SPARK_MASTER_OPTS=-Dspark.master.rest.enabled=true -Dspark.master.rest.port=6066
+    ports:
+      - "7077:7077"
+      - "8081:8080"
+      - "6066:6066"
+    volumes:
+      - ./../spark-app:/opt/spark/work-dir
+    command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
+    networks:
+      - spark-network
+  ngrok:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    ports:
+      - 4040:4040
+    networks:
+      - spark-network
+      
+networks:
+  spark-network:
+    driver: bridge
