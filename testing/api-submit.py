@@ -17,7 +17,6 @@ payload = {
     "sparkProperties": {
         "spark.app.name": "PySparkApp",
         "spark.master": "spark://<spark-master>:7077",
-        "spark.submit.deployMode": "client"
     }
 }
 
