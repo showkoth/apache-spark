@@ -7,16 +7,17 @@ spark_master_url = "http://localhost:6066/v1/submissions/create"
 # Define the job payload
 payload = {
     "action": "CreateSubmissionRequest",
-    # "appArgs": ["<your-python-script-arguments>"],
-    "appResource": "local:///opt/spark/work-dir/test-script.py",
-    # "clientSparkVersion": "3.2.0",
-    "mainClass": "org.apache.spark.deploy.PythonRunner",
-    # "environmentVariables": {
-    #     "PYSPARK_PYTHON": "/usr/bin/python3",
-    # },
+    "appArgs": [],
+    "appResource": "/opt/spark/work-dir/test-script.py",
+    "clientSparkVersion": "3.5.4",
+    "mainClass": "",
+    "environmentVariables": {
+        "PYSPARK_PYTHON": "/usr/bin/python3",
+    },
     "sparkProperties": {
         "spark.app.name": "PySparkApp",
-        "spark.master": "spark://<spark-master>:7077"
+        "spark.master": "spark://<spark-master>:7077",
+        "spark.submit.deployMode": "client"
     }
 }
 

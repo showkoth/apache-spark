@@ -5,7 +5,7 @@ spark = ps.SparkSession.builder \
     .master("local") \
     .getOrCreate()
 
-input_path = "/opt/spark/work-dir/test.csv"
+input_path = "/opt/spark/work-dir/tips.csv"
 output_path= "/opt/spark/work-dir/output.csv"
 
 df = spark.read\
@@ -16,13 +16,13 @@ df = spark.read\
 print("Input Data")
 df.show()
 
-new_df = df.filter(ps.functions.col("HUCENSUS2010") > 10000).select("STATE", "CTYNAME")
+new_df = df.filter(ps.functions.col("tip") > 2).select("sex", "time")
 print("Transformed Data")
 new_df.show()
 
-new_df.write \
-    .mode("overwrite") \
-    .option("header", "true") \
-    .csv(output_path)
+# new_df.write \
+#     .mode("overwrite") \
+#     .option("header", "true") \
+#     .csv(output_path)
 
 spark.stop()
