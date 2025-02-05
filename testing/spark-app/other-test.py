@@ -4,15 +4,15 @@ from pyspark.sql.functions import rand
 # Initialize Spark Session
 spark = SparkSession.builder \
     .appName("LongRunningTask") \
-    .master("spark://localhost:7077") \
-    .config("spark.executor.memory", "2g") \
-    .config("spark.executor.cores", "2") \
+    .master("spark://8.tcp.ngrok.io:15492") \
+    .config("spark.executor.memory", "1G") \
+    .config("spark.executor.cores", "1") \
     .getOrCreate()
 
 sc = spark.sparkContext
 
 # Number of total points
-NUM_SAMPLES = 100_000_000  # Increase to make it run for a minute
+NUM_SAMPLES = 100000000  
 
 def inside_circle(_):
     """Check if a randomly generated point falls inside a unit circle."""
@@ -29,4 +29,4 @@ pi_estimate = (4.0 * inside_count) / NUM_SAMPLES
 print(f"Estimated Pi: {pi_estimate}")
 
 # Stop Spark Session
-spark.stop()
+spark.stop

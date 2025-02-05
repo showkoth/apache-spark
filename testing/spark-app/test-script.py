@@ -6,7 +6,7 @@ os.environ['SPARK_LOCAL_IP'] = 'localhost'
 
 spark = (ps.SparkSession.builder
     .appName("TestCsv")
-    .master("spark://6.tcp.ngrok.io:17983")
+    .master("spark://0.tcp.ngrok.io:18266")
     .config("spark.driver.memory", "1g")
     .config("spark.executor.memory", "1g")
     .config("spark.sql.shuffle.partitions", "2")  # Reduce for small datasets

@@ -6,11 +6,9 @@ services:
       - SPARK_MASTER_HOST=spark-master
       - SPARK_LOCAL_IP=spark-master
       - SPARK_CONF_DIR=/opt/spark/conf
-      - SPARK_MASTER_OPTS=-Dspark.master.rest.enabled=true -Dspark.master.rest.port=6066 -Dspark.job.submit.acl=rnahm
     ports:
       - "7077:7077"
       - "8081:8080"
-      - "6066:6066"
     volumes:
       - ./../spark-app:/opt/spark/work-dir
     command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
