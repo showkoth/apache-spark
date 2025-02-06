@@ -15,6 +15,8 @@ services:
     command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
     networks:
       - spark-network
+    extra_hosts:
+      - "host.docker.internal:172.29.201.76"
 
   spark-worker:
     image: apache/spark:3.5.4
@@ -22,9 +24,7 @@ services:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_CORES=4
-      - SPARK_WORKER_MEMORY=4g
-      - SPARK_DRIVER_MEMORY=2g
-      - SPARK_EXECUTOR_MEMORY=2g
+      - SPARK_WORKER_MEMORY=10g
       - SPARK_WORKER_OPTS="-Dspark.worker.cleanup.enabled=true"
       - SPARK_LOG_LEVEL=DEBUG
       - SPARK_CONF_DIR=/opt/spark/conf
@@ -35,6 +35,8 @@ services:
     command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --webui-port 8081'"
     networks:
       - spark-network
+    extra_hosts:
+      - "host.docker.internal:172.29.201.76"
 networks:
   spark-network:
     driver: bridge
