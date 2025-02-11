@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Feb 11 18:35:30 UTC 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0194-f64b-800f-000007d3aa30 
+Tue Feb 11 18:56:53 UTC 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0194-f65f-13ef-00000b6518d8 
 on database directory /home/rpnpa/web3db/apache-spark/testing/spark-app/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
 Loaded from file:/home/rpnpa/miniforge3/envs/web3db/lib/python3.8/site-packages/pyspark/jars/derby-10.14.2.0.jar
 java.vendor=Ubuntu
