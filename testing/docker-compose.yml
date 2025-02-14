@@ -15,8 +15,8 @@ services:
     command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
     networks:
       - spark-network
-    extra_hosts:
-      - "host.docker.internal:172.23.153.11"
+    # extra_hosts:
+    #   - "host.docker.internal:172.23.153.11"
 
   spark-worker:
     image: apache/spark:3.5.4
@@ -35,8 +35,8 @@ services:
     command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --webui-port 8081'"
     networks:
       - spark-network
-    extra_hosts:
-      - "host.docker.internal:172.23.153.11"
+    # extra_hosts:
+    #   - "host.docker.internal:172.23.153.11"
 networks:
   spark-network:
     driver: bridge

@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 from random import random
 from operator import add
 

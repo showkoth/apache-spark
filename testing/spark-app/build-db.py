@@ -3,12 +3,13 @@ from pyspark.sql import SparkSession
 
 spark = (
     SparkSession.builder.appName("Build-DB")
-    .master("local[*]")
     .config("spark.executor.memory", "2g")
     .config("spark.sql.shuffle.partitions", "2")  # Reduce for small datasets
     .config("spark.default.parallelism", "2")
-    .config("spark.driver.bindAddress", "localhost")
-    .config("spark.driver.host", "localhost")
+    .config("spark.blockManager.port", "10025")
+    .config("spark.driver.blockManager.port", "10026")
+    .config("spark.driver.port", "10027")
+    .config("spark.driver.host", "172.23.153.11")
     .config("spark.sql.adaptive.enabled", "true")
     .config("spark.memory.offHeap.enabled", "true")
     .config("spark.memory.offHeap.size", "1g")
