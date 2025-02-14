@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 
 spark = (
     SparkSession.builder.appName("Build-DB")
-    .master("local[6]")
+    .master("local[*]")
     .config("spark.executor.memory", "2g")
     .config("spark.sql.shuffle.partitions", "2")  # Reduce for small datasets
     .config("spark.default.parallelism", "2")
@@ -12,6 +12,7 @@ spark = (
     .config("spark.sql.adaptive.enabled", "true")
     .config("spark.memory.offHeap.enabled", "true")
     .config("spark.memory.offHeap.size", "1g")
+    .config("spark.sql.warehouse.dir", "./spark-warehouse")
     .enableHiveSupport()
     .getOrCreate()
 )
@@ -30,6 +31,7 @@ df.printSchema()
 print("Writing Data")
 df.write.mode("overwrite").saveAsTable(f"{db_name}.{table_name}")
 
+spark.sql("SHOW TABLES").show()
 print("Data successfully written to table")
 
 spark.stop()

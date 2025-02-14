@@ -16,7 +16,6 @@ services:
       - spark-network
   ngrok:
     image: ngrok/ngrok:latest
-    restart: unless-stopped
     command:
       - "start"
       - "--all"

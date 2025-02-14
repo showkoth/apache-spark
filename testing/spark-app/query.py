@@ -10,16 +10,18 @@ os.environ["SPARK_WORKER_MEMORY"] = "2g"  # Adjust based on your machine
 
 spark = (
     SparkSession.builder.appName("Web3DB")
-    .master("local[*]")  # Use all available cores
     .config("spark.driver.memory", "2g")
     .config("spark.executor.memory", "2g")
     .config("spark.sql.shuffle.partitions", "2")  # Reduce for small datasets
     .config("spark.default.parallelism", "2")
-    .config("spark.driver.bindAddress", "localhost")
-    .config("spark.driver.host", "localhost")
+    .config("spark.blockManager.port", "10025")
+    .config("spark.driver.blockManager.port", "10026")
+    .config("spark.driver.port", "10027")
+    .config("spark.driver.host", "172.23.153.11")
     .config("spark.sql.adaptive.enabled", "true")
     .config("spark.memory.offHeap.enabled", "true")
     .config("spark.memory.offHeap.size", "1g")
+    .config("spark.sql.warehouse.dir", "./spark-warehouse")
     .enableHiveSupport()
     .getOrCreate()
 )
@@ -28,6 +30,8 @@ db_name = "default"
 table_name = "principals_table"
 
 spark.sql("SHOW DATABASES").show()
+spark.sql("USE default")
+spark.sql("SHOW TABLES").show()
 
 # get db info
 spark.sql(f"SELECT COUNT(*) FROM {db_name}.{table_name}").show()

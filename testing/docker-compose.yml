@@ -16,7 +16,7 @@ services:
     networks:
       - spark-network
     extra_hosts:
-      - "host.docker.internal:172.29.201.76"
+      - "host.docker.internal:172.23.153.11"
 
   spark-worker:
     image: apache/spark:3.5.4
@@ -36,7 +36,7 @@ services:
     networks:
       - spark-network
     extra_hosts:
-      - "host.docker.internal:172.29.201.76"
+      - "host.docker.internal:172.23.153.11"
 networks:
   spark-network:
     driver: bridge
