@@ -14,4 +14,4 @@ services:
       - SPARK_EXECUTOR_MEMORY=2g
       - SPARK_WORKER_OPTS="-Dspark.worker.cleanup.enabled=true"
       - SPARK_LOG_LEVEL=DEBUG
-    command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://${MASTER_SPARK} --webui-port 8081'"
+    command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://129.74.152.201:7077 --webui-port 8081'"

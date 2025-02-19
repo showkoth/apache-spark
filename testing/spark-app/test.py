@@ -5,7 +5,7 @@ from operator import add
 
 from pyspark.sql import SparkSession
 
-os.environ["SPARK_LOCAL_IP"] = "172.23.153.11"
+os.environ["SPARK_LOCAL_IP"] = "129.74.152.201"
 
 if __name__ == "__main__":
     """
@@ -13,10 +13,11 @@ if __name__ == "__main__":
     """
     spark = (
         SparkSession.builder.appName("PythonPi")
+        .master("spark://129.74.152.201:7077")
         .config("spark.blockManager.port", "10025")
         .config("spark.driver.blockManager.port", "10026")
         .config("spark.driver.port", "10027")
-        .config("spark.driver.host", "172.23.153.11")
+        .config("spark.driver.host", "129.74.152.201")
         .getOrCreate()
     )
 
