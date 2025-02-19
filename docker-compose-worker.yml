@@ -1,0 +1,17 @@
+version: "1"
+
+services:
+  spark-master:
+    image: apache/spark:3.5.4
+    container_name: spark-worker
+    network_mode: "host"
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://129.74.152.201:7077
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=4g
+      - SPARK_DRIVER_MEMORY=2g
+      - SPARK_EXECUTOR_MEMORY=2g
+      - SPARK_WORKER_OPTS="-Dspark.worker.cleanup.enabled=true"
+      - SPARK_LOG_LEVEL=DEBUG
+    command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://${MASTER_SPARK} --webui-port 8081'"
