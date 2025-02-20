@@ -2,18 +2,12 @@ import sys
 from pyspark.sql import SparkSession
 
 spark = (
-    SparkSession.builder.appName("Build-DB")
-    .config("spark.executor.memory", "2g")
-    .config("spark.sql.shuffle.partitions", "2")  # Reduce for small datasets
-    .config("spark.default.parallelism", "2")
+    SparkSession.builder.appName("PythonPi")
+    .master("spark://129.74.152.201:7077")
     .config("spark.blockManager.port", "10025")
     .config("spark.driver.blockManager.port", "10026")
     .config("spark.driver.port", "10027")
-    .config("spark.driver.host", "172.23.153.11")
-    .config("spark.sql.adaptive.enabled", "true")
-    .config("spark.memory.offHeap.enabled", "true")
-    .config("spark.memory.offHeap.size", "1g")
-    .config("spark.sql.warehouse.dir", "./spark-warehouse")
+    .config("spark.driver.host", "129.74.152.201")
     .enableHiveSupport()
     .getOrCreate()
 )

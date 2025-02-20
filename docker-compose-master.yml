@@ -1,6 +1,18 @@
-version: "1"
-
 services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+
   spark-master:
     image: apache/spark:3.5.4
     container_name: spark-master
@@ -12,3 +24,7 @@ services:
       - SPARK_LOCAL_IP=129.74.152.201
       - SPARK_CONF_DIR=/opt/spark/conf
     command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"
+    depends_on:
+      - namenode
+volumes:
+  hadoop_namenode:
