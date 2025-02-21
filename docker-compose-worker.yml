@@ -1,19 +1,17 @@
-version: "1"
-
 services:
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
     container_name: datanode
     restart: always
     volumes:
-      - hadoop_namenode:/hadoop/dfs/name
+      - hadoop_datanode:/hadoop/dfs/data
     environment:
       - CLUSTER_NAME=test
     network_mode: "host"
     env_file:
       - ./hadoop.env
 
-  spark-master:
+  spark-worker:
     image: apache/spark:3.5.4
     container_name: spark-worker
     network_mode: "host"
@@ -28,7 +26,7 @@ services:
       - SPARK_LOG_LEVEL=DEBUG
     command: "/bin/bash -c '/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://129.74.152.201:7077 --webui-port 8081'"
     depends_on:
-      - namenode
+      - datanode
 
 volumes:
-  hadoop_namenode:
+  hadoop_datanode:
