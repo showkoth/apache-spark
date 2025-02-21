@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Feb 21 16:32:06 EST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0195-2a6c-c75b-00002b879678 
+on database directory /home/rnahm/web3db/apache-spark/testing/spark-app/metastore_db with class loader sun.misc.Launcher$AppClassLoader@17f052a3 
+Loaded from file:/home/rnahm/miniforge3/envs/web3db/lib/python3.8/site-packages/pyspark/jars/derby-10.14.2.0.jar
+java.vendor=Private Build
+java.runtime.version=1.8.0_392-8u392-ga-1~20.04-b08
+user.dir=/home/rnahm/web3db/apache-spark/testing/spark-app
+os.name=Linux
+os.arch=amd64
+os.version=5.11.0-051100-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
