@@ -2,7 +2,7 @@ import sys
 from pyspark.sql import SparkSession
 
 spark = (
-    SparkSession.builder.appName("PythonPi")
+    SparkSession.builder.appName("Build-DB")
     .master("spark://129.74.152.201:7077")
     .config("spark.blockManager.port", "10025")
     .config("spark.driver.blockManager.port", "10026")
