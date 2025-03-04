@@ -7,10 +7,14 @@ services:
       - hadoop_datanode:/hadoop/dfs/data
     environment:
       - CLUSTER_NAME=test
-    network_mode: "host"
+    #  network_mode: "host"
     env_file:
       - ./hadoop.env
-
+    ports:
+      - 9864:9864
+      - 9865:9865
+      - 9866:9866
+      - 9867:9867
   spark-worker:
     image: apache/spark:3.5.4
     container_name: spark-worker
